@@ -17,12 +17,12 @@ export default defineConfig({
     }
   },
   preview: {
-  host: '0.0.0.0',
-  port: parseInt(process.env.PORT) || 4173,
-  allowedHosts: 'all'  // ✅ this allows Render to access your app
-},
+    host: '0.0.0.0',
+    port: parseInt(process.env.PORT) || 4173,
+    allowedHosts: 'all'  // This allows Render to access your app
+  },
   build: {
-    outDir: 'dist',
+    outDir: '../server/client/dist', // Update path to match your server.js expectations
     assetsDir: 'assets',
     rollupOptions: {
       input: {
