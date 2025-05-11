@@ -17,10 +17,10 @@ export default defineConfig({
     }
   },
   preview: {
-    host: '0.0.0.0',
-    port: parseInt(process.env.PORT) || 4173,
-    allowedHosts: ['newsrc1.onrender.com'], // <-- Allow all hosts (or use your specific subdomain)
-  },
+  host: '0.0.0.0',
+  port: parseInt(process.env.PORT) || 4173,
+  allowedHosts: 'all'  // ✅ this allows Render to access your app
+},
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
