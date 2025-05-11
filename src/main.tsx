@@ -9,25 +9,22 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
     super(props);
     this.state = { hasError: false, error: null };
   }
-
   static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
-
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('App initialization error:', error, errorInfo);
   }
-
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
-          <div className="text-center p-8 max-w-md bg-white rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold text-red-600 mb-4">Something went wrong</h2>
-            <p className="text-gray-700 mb-4">The application failed to initialize properly.</p>
-            <p className="text-sm text-gray-500 mb-4">Error: {this.state.error?.message || 'Unknown error'}</p>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4 text-center">
+          <div className="bg-white p-6 rounded-lg shadow-md max-w-md">
+            <h1 className="text-xl font-bold text-red-600 mb-2">Something went wrong</h1>
+            <p className="mb-4 text-gray-700">The application failed to initialize properly.</p>
+            <p className="mb-4 text-red-500">Error: {this.state.error?.message || 'Unknown error'}</p>
             <button 
-              onClick={() => window.location.reload()}
+              onClick={() => window.location.reload()} 
               className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700"
             >
               Reload Application
@@ -36,7 +33,6 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
         </div>
       );
     }
-
     return this.props.children;
   }
 }
@@ -57,7 +53,6 @@ try {
   if (!rootElement) {
     throw new Error('Root element not found');
   }
-
   const root = createRoot(rootElement);
   
   root.render(
@@ -67,7 +62,7 @@ try {
       </ErrorBoundary>
     </StrictMode>
   );
-
+  
   // Hide loading spinner after a short delay
   setTimeout(hideLoadingSpinner, 500);
 } catch (error) {
@@ -78,12 +73,15 @@ try {
   const rootElement = document.getElementById('root');
   if (rootElement) {
     rootElement.innerHTML = `
-      <div style="display: flex; align-items: center; justify-content: center; height: 100vh; padding: 20px;">
-        <div style="text-align: center; padding: 20px; max-width: 500px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-          <h2 style="color: #dc2626; font-size: 1.5rem; margin-bottom: 1rem;">Critical Error</h2>
-          <p style="margin-bottom: 1rem;">The application failed to initialize.</p>
-          <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 1rem;">${error instanceof Error ? error.message : 'Unknown error'}</p>
-          <button onclick="window.location.reload()" style="background-color: #4f46e5; color: white; padding: 0.5rem 1rem; border-radius: 0.25rem; border: none; cursor: pointer;">
+      <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4 text-center">
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-md">
+          <h1 class="text-xl font-bold text-red-600 mb-2">Critical Error</h1>
+          <p class="mb-4 text-gray-700">The application failed to initialize.</p>
+          <p class="mb-4 text-red-500">${error instanceof Error ? error.message : 'Unknown error'}</p>
+          <button 
+            onclick="window.location.reload()" 
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
             Reload Application
           </button>
         </div>
